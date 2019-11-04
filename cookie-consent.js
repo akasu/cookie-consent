@@ -548,10 +548,12 @@ function setSrc(type) {
     for (var i = 0, n = elemList.length; i < n; i++) {
         var domType = elemList[i].localName;
         var dataSrc = elemList[i].getAttribute('data-src');
+        elemList[i].src = '';
         if(dataSrc != null) {
             if(domType === 'script') {
                 loadFuntion(dataSrc, '');
             } else {
+
                 elemList[i].src = dataSrc;
             }
         } else {

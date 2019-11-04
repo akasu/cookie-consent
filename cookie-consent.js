@@ -265,7 +265,6 @@ function loadCookieSettings(elem, p) {
             var label = document.createElement('label');
             label.className = 'switch';
             var checked = '';
-            console.log(c.type);
             if(cookieContent[p.scripts[c].type] == 1) {
                 checked = 'checked="checked"';
             }
@@ -378,11 +377,6 @@ function saveCookieConsentModalSettings() {
     var elemList = document.querySelectorAll('#cookieConsentSettings input');
     var cookieSettings = "";
     for (var i = 0, n = elemList.length; i < n; i++) {
-        if (elemList[i].className === 'activate') {
-            cookieSettings+= "analytics="
-        } else {
-            console.log(elemList[i].id);
-        }
         if(elemList[i].checked) {
             document.cookie = elemList[i].id +"=1; ";
         } else {
@@ -392,7 +386,6 @@ function saveCookieConsentModalSettings() {
     var a = new Date();
     a = new Date(a.getTime() +1000*60*60*24*cookieConsentConfig.cookieExpiresAfterDays);
     document.cookie = "name=consentCookie; consentCookie=1; expires="+ a.toGMTString() +"; path=/;";
-    console.log("Cookie: "+ document.cookie);
 }
 
 function saveCookieConsentBarSettings() {
@@ -418,8 +411,6 @@ function saveCookieConsentBarSettings() {
     var a = new Date();
     a = new Date(a.getTime() +1000*60*60*24*cookieConsentConfig.cookieExpiresAfterDays);
     document.cookie = "name=consentCookie; consentCookie=1; expires="+ a.toGMTString() +"; path=/;";
-    console.log("Cookie: "+ document.cookie);
-
 }
 
 function closeCookieConsent() {
@@ -504,9 +495,7 @@ Get CookieContent
 */
 function getConsentCookie(cname) {
     var name = cname + "=";
-    //console.log("cookie: "+ document.cookie);
     var decodedCookie = decodeURIComponent(document.cookie);
-    //console.log(decodedCookie);
     var ca = decodedCookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
@@ -514,7 +503,6 @@ function getConsentCookie(cname) {
             c = c.substring(1);
         }
         if (c.indexOf(name) == 0) {
-            //console.log(name.length, c.length);
             return c.substring(name.length, c.length);
         }
     }
@@ -587,8 +575,6 @@ function loadFunction(url, implementationCode) {
         loadJSFile(url, location);
     }
 
-    console.log(location);
-
     var script = document.createElement("script");
     script.onload = script.onerror = function(){ this.remove(); };
     script.src = "data:text/plain;base64," + btoa(implementationCode);
@@ -596,71 +582,6 @@ function loadFunction(url, implementationCode) {
 
 }
 
-/*
-    When click on Save-Button then set Cookie-Information,
-    when cookie is clicked as set, then load required js-files and code
-*/
-/*
-document.getElementById("checkButton").onclick = function () {
-
-    var marketingCookie = 0;
-    var analyticsCookie = 0;
-    var socialCookie = 0;
-
-    if (document.getElementById('loadMarketing').checked === true) {
-        loadFiles(loadMarketing);
-        document.cookie = "marketingCookie=1;";
-    } else {
-        document.cookie = "marketingCookie=0;";
-    }
-
-    if (document.getElementById('loadAnalytics').checked === true) {
-        loadFiles(loadAnalytics);
-        document.cookie = "analyticsCookie=1;";
-    } else {
-        document.cookie = "analyticsCookie=0;";
-    }
-
-    if (document.getElementById('loadSocial').checked === true) {
-        loadFiles(loadSocial);
-        document.cookie = "socialCookie=1;";
-    } else {
-        document.cookie = "socialCookie=0;";
-    }
-
-    document.cookie = 'cookieset=1;';
-    alert(document.cookie);
-    console.log(document.cookie);
-    document.getElementById('cookieConsent').style.display = 'none';
-    document.getElementById('revokeCookieSettings').style.display = 'block';
-};
-*/
-
-/*
-Revoke CookieSetting
-*/
-/*
-document.getElementById('revokeCookieConsentButton').onclick = function () {
-    analyticsCookie = getCookie('analyticsCookie');
-    marketingCookie = getCookie('marketingCookie');
-    socialCookie = getCookie('socialCookie');
-
-    if (socialCookie == 1) {
-        document.getElementById('loadSocial').checked = true;
-    }
-    if (analyticsCookie == 1) {
-        document.getElementById("loadAnalytics").checked = true;
-    }
-    if (marketingCookie == 1) {
-        document.getElementById("loadMarketing").checked = true;
-    }
-    document.getElementById('revokeCookieSettings').style.display = 'none';
-    document.getElementById('cookieConsent').style.display = 'block';
-};
-*/
-/*
-If CookieSetting changed, then unload Scripts from Site
-*/
 function unloadScripts() {
 
 }

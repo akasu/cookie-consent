@@ -10,6 +10,7 @@ function loadCookieConsentInitial() {
     cookieContent = {};
     loadCookieBar = 1;
     consentBar = 0;
+    reload = 0;
 
     /*
     * Get Consent-Cookie-Status
@@ -397,6 +398,11 @@ function saveCookieConsentModalSettings() {
     document.getElementById('cookieConsentContainer').style.display = 'none';
     document.getElementById('revokeCookieConsentSettings').style.display = 'block';
     modalIsOpen = 0;
+
+    if(reload === 1) {
+        //window.location.reload();
+        reload = 0;
+    }
 }
 
 function saveCookieConsentBarSettings() {
@@ -427,6 +433,10 @@ function saveCookieConsentBarSettings() {
     document.getElementById('cookieConsentContainer').style.display = 'none';
     document.getElementById('revokeCookieConsentSettings').style.display = 'block';
     modalIsOpen = 0;
+    if(reload === 1) {
+        window.location.reload();
+        reload = 0;
+    }
 }
 
 function closeCookieConsent() {
@@ -556,6 +566,7 @@ function setSrc(type) {
         if(domType === 'iframe') {
             var html = "";
             elemList[i].innerHTML = html;
+            reload = 1;
         }
         if(dataSrc != null) {
             if(domType === 'script') {

@@ -11,6 +11,7 @@ function loadCookieConsentInitial() {
     loadCookieBar = 1;
     consentBar = 0;
     reload = 0;
+    domain = location.hostname;
 
     /*
     * Get Consent-Cookie-Status
@@ -500,12 +501,19 @@ function checkCookieSettings() {
     }
 }
 
-function setCookiesFromModal() {
+function blockAllActionsOnSite() {
+    if(cookieConsentConfig.blockActions) {
+        document.body.style.overflow = 'hidden';
 
+        var div = document.createElement('div');
+        div.className = p.type + 'dontTouch';
+        document.body.appendChild(div);
+
+    }
 }
 
-function blockAllActionsOnSite() {
-
+function unblockAllActionsOnSite() {
+    document.querySelector('.dontTouch').style.display = 'none';
 }
 
 function getCookieStatusFromModal() {
@@ -514,6 +522,41 @@ function getCookieStatusFromModal() {
 
 function getCookieStatusFromBar() {
 
+}
+
+function blockThirdPartyIframe() {
+
+}
+
+function blockThirdPartyScripts() {
+
+}
+
+/**
+ * Is Do-Not-Track in Browser-Settings set
+ * https://medium.com/farewill/how-to-detect-and-use-do-not-track-on-your-website-77f21f62be48
+ * @returns {boolean}
+ */
+
+function isDoNotTrackEnabled () {
+    const doNotTrackOption = (
+        window.doNotTrack || // Main Way at modern Browsers
+        window.navigator.doNotTrack || //Internet Explorer 11 and older versions of Edge
+        window.navigator.msDoNotTrack // Internet Explorer 9 and 10
+    )
+
+    if (!doNotTrackOption) {
+        return false
+    }
+
+    if (
+        doNotTrackOption.charAt(0)  === '1' ||
+        doNotTrackOption === 'yes' // Prior to Gecko 32, Firefox used the values yes, no or unspecified instead.
+    ) {
+        return true
+    }
+
+    return false
 }
 
 /*

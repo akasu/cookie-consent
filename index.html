@@ -4,6 +4,26 @@
     <meta charset="UTF-8">
     <title>Cookie Settings</title>
 
+    <!--
+    <script type="application/javascript" src="mutation-observer.js"></script>
+    -->
+    <script type="application/javascript" src="cookie-consent.config.js"></script>
+    <link rel="stylesheet" href="cookie-consent.css"/>
+    <script type="application/javascript" src="cookie-consent.js"></script>
+
+    <style>
+
+        body {
+            background: #369;
+        }
+
+        iframe {
+            background: #fff;
+            border: 1px solid #555;
+        }
+
+    </style>
+
 </head>
 <body>
 
@@ -50,44 +70,10 @@
       a.src = g;
       m.parentNode.insertBefore(a, m)
    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-   ga('create', 'UA-259356-2', 'auto');
+   ga('create', 'UA-XXXXXX-X', 'auto');
    ga('set', 'anonymizeIp', true);
    ga('send', 'pageview');
 </script>
-
-<script type="text/javascript" src="cookie-consent.config.js"></script>
-<link rel="stylesheet" href="cookie-consent.css"/>
-<script type="text/javascript" src="cookie-consent.js"></script>
-
-<script>
-
-
-    /*
-    *
-    * Cookie Consent Configuration
-    *
-    */
-
-    //onReady(loadCookieConsentInitial);
-    document.addEventListener("DOMContentLoaded", function () {
-        loadCookieConsentInitial();
-    });
-
-
-</script>
-
-<style>
-
-    body {
-        background: #369;
-    }
-
-    iframe {
-        background: #fff;
-        border: 1px solid #555;
-    }
-
-</style>
 
 </body>
 </html>

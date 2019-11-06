@@ -168,7 +168,7 @@ function loadCookieBarSettings(elem, p) {
             input.type = 'checkbox';
             input.id = p.type;
             input.className = 'activate';
-            if(cookieContent[p.type] == 1) {
+            if (cookieContent[p.type] == 1) {
                 input.checked = 'checked';
             }
             input.onchange = function () {
@@ -178,7 +178,7 @@ function loadCookieBarSettings(elem, p) {
                     for (var i = 0, n = elemList.length; i < n; i++) {
                         elemList[i].checked = 'checked';
                     }
-                    document.querySelector('#cookieConsentBarSettings #'+ this.id).checked = 'checked';
+                    document.querySelector('#cookieConsentBarSettings #' + this.id).checked = 'checked';
                 } else {
                     document.getElementById('markAllCookieConsentSettings').innerHTML = cookieConsentConfig.text.activateAll;
                     allCookiesInModalAreSelected = 0;
@@ -187,7 +187,7 @@ function loadCookieBarSettings(elem, p) {
                     for (var i = 0, n = elemList.length; i < n; i++) {
                         elemList[i].checked = '';
                     }
-                    document.querySelector('#cookieConsentBarSettings #'+ this.id).checked = '';
+                    document.querySelector('#cookieConsentBarSettings #' + this.id).checked = '';
                 }
             };
 
@@ -228,7 +228,7 @@ function loadCookieSettings(elem, p) {
             input.type = 'checkbox';
             input.id = p.type;
             input.className = 'activate';
-            if(cookieContent[p.type] == 1) {
+            if (cookieContent[p.type] == 1) {
                 input.checked = 'checked';
             }
 
@@ -240,7 +240,7 @@ function loadCookieSettings(elem, p) {
                         elemList[i].checked = 'checked';
                     }
 
-                    document.querySelector('#cookieConsentBarSettings #'+ this.id).checked = 'checked';
+                    document.querySelector('#cookieConsentBarSettings #' + this.id).checked = 'checked';
 
                 } else {
                     document.getElementById('markAllCookieConsentSettings').innerHTML = cookieConsentConfig.text.activateAll;
@@ -250,7 +250,7 @@ function loadCookieSettings(elem, p) {
                     for (var i = 0, n = elemList.length; i < n; i++) {
                         elemList[i].checked = '';
                     }
-                    document.querySelector('#cookieConsentBarSettings #'+ this.id).checked = '';
+                    document.querySelector('#cookieConsentBarSettings #' + this.id).checked = '';
                 }
             };
             label.appendChild(input);
@@ -274,11 +274,11 @@ function loadCookieSettings(elem, p) {
             var label = document.createElement('label');
             label.className = 'switch';
             var checked = '';
-            if(cookieContent[p.scripts[c].type] == 1) {
+            if (cookieContent[p.scripts[c].type] == 1) {
                 checked = 'checked="checked"';
             }
 
-            label.innerHTML = '<input type="checkbox" '+ checked +' id="' + p.scripts[c].type + '" onchange="deactivateParentInput(\'' + p.type + '\')"><span class="slider"></span>';
+            label.innerHTML = '<input type="checkbox" ' + checked + ' id="' + p.scripts[c].type + '" onchange="deactivateParentInput(\'' + p.type + '\')"><span class="slider"></span>';
             div.appendChild(label);
             cookieElem.appendChild(div);
         }
@@ -326,13 +326,13 @@ function changeStatusOfAllGroups() {
 }
 
 function changeSettingsFromBarInModal() {
-    if(allCookiesInBarAreSelected === 0) {
+    if (allCookiesInBarAreSelected === 0) {
 
     }
 }
 
 function changeSettingsFromModalInBar() {
-    if(allCookiesInModalAreSelected === 0) {
+    if (allCookiesInModalAreSelected === 0) {
         allCookiesInBarAreSelected = 0;
         selectAllCookiesInConsentBar();
     } else {
@@ -386,21 +386,21 @@ function saveCookieConsentModalSettings() {
     var elemList = document.querySelectorAll('#cookieConsentSettings input');
     var cookieSettings = "";
     for (var i = 0, n = elemList.length; i < n; i++) {
-        if(elemList[i].checked) {
-            document.cookie = elemList[i].id +"=1; ";
+        if (elemList[i].checked) {
+            document.cookie = elemList[i].id + "=1; ";
         } else {
-            document.cookie = elemList[i].id +"=0; ";
+            document.cookie = elemList[i].id + "=0; ";
         }
     }
     var a = new Date();
-    a = new Date(a.getTime() +1000*60*60*24*cookieConsentConfig.cookieExpiresAfterDays);
-    document.cookie = "name=consentCookie; consentCookie=1; expires="+ a.toGMTString() +"; path=/;";
+    a = new Date(a.getTime() + 1000 * 60 * 60 * 24 * cookieConsentConfig.cookieExpiresAfterDays);
+    document.cookie = "name=consentCookie; consentCookie=1; expires=" + a.toGMTString() + "; path=/;";
     document.getElementById('cookieConsentBar').style.display = 'none';
     document.getElementById('cookieConsentContainer').style.display = 'none';
     document.getElementById('revokeCookieConsentSettings').style.display = 'block';
     modalIsOpen = 0;
 
-    if(reload === 1) {
+    if (reload === 1) {
         //window.location.reload();
         reload = 0;
     }
@@ -413,28 +413,28 @@ function saveCookieConsentBarSettings() {
         var element = elemList[i].id;
         var cookieList = cookieConsentConfig.purposes[element].scripts;
 
-        if(elemList[i].checked) {
-            for(var prop in cookieList) {
-                document.cookie = prop +"=1;";
+        if (elemList[i].checked) {
+            for (var prop in cookieList) {
+                document.cookie = prop + "=1;";
             }
-            document.cookie = elemList[i].id +"=1;";
+            document.cookie = elemList[i].id + "=1;";
         } else {
-            for(var prop in cookieList) {
-                document.cookie = prop +"=0;";
+            for (var prop in cookieList) {
+                document.cookie = prop + "=0;";
             }
-            document.cookie = elemList[i].id +"=0;";
+            document.cookie = elemList[i].id + "=0;";
         }
     }
 
     var a = new Date();
-    a = new Date(a.getTime() +1000*60*60*24*cookieConsentConfig.cookieExpiresAfterDays);
-    document.cookie = "name=consentCookie; consentCookie=1; expires="+ a.toGMTString() +"; path=/;";
+    a = new Date(a.getTime() + 1000 * 60 * 60 * 24 * cookieConsentConfig.cookieExpiresAfterDays);
+    document.cookie = "name=consentCookie; consentCookie=1; expires=" + a.toGMTString() + "; path=/;";
 
     document.getElementById('cookieConsentBar').style.display = 'none';
     document.getElementById('cookieConsentContainer').style.display = 'none';
     document.getElementById('revokeCookieConsentSettings').style.display = 'block';
     modalIsOpen = 0;
-    if(reload === 1) {
+    if (reload === 1) {
         window.location.reload();
         reload = 0;
     }
@@ -482,15 +482,15 @@ function checkCookieSettings() {
     loadCookieBar = 0;
     for (var p in cookieConsentConfig.purposes) {
         var pContent = cookieConsentConfig.purposes[p];
-        if(Object.keys(pContent.scripts).length) {
+        if (Object.keys(pContent.scripts).length) {
             var consentCookieContent = getConsentCookie(p);
-            if(consentCookieContent == '') {
+            if (consentCookieContent == '') {
                 loadCookieBar = 1;
             }
 
-            for(var z in pContent.scripts) {
+            for (var z in pContent.scripts) {
                 var consentSubCookieContent = getConsentCookie(z);
-                if(consentSubCookieContent == '') {
+                if (consentSubCookieContent == '') {
                     loadCookieBar = 1;
                     consentCookieContent = 0;
                 }
@@ -502,7 +502,7 @@ function checkCookieSettings() {
 }
 
 function blockAllActionsOnSite() {
-    if(cookieConsentConfig.blockActions) {
+    if (cookieConsentConfig.blockActions) {
         document.body.style.overflow = 'hidden';
 
         var div = document.createElement('div');
@@ -538,7 +538,7 @@ function blockThirdPartyScripts() {
  * @returns {boolean}
  */
 
-function isDoNotTrackEnabled () {
+function isDoNotTrackEnabled() {
     const doNotTrackOption = (
         window.doNotTrack || // Main Way at modern Browsers
         window.navigator.doNotTrack || //Internet Explorer 11 and older versions of Edge
@@ -550,7 +550,7 @@ function isDoNotTrackEnabled () {
     }
 
     if (
-        doNotTrackOption.charAt(0)  === '1' ||
+        doNotTrackOption.charAt(0) === '1' ||
         doNotTrackOption === 'yes' // Prior to Gecko 32, Firefox used the values yes, no or unspecified instead.
     ) {
         return true
@@ -558,6 +558,11 @@ function isDoNotTrackEnabled () {
 
     return false
 }
+
+/**
+ * https://medium.com/snips-ai/how-to-block-third-party-scripts-with-a-few-lines-of-javascript-f0b08b9c4c0
+ * @returns {string|boolean}
+ */
 
 /*
 Get CookieContent
@@ -582,16 +587,16 @@ function loadScripts() {
     loadCookieBar = 0;
     for (var p in cookieConsentConfig.purposes) {
         var pContent = cookieConsentConfig.purposes[p];
-        if(Object.keys(pContent.scripts).length) {
+        if (Object.keys(pContent.scripts).length) {
             var consentCookieContent = getConsentCookie(p);
-            if(consentCookieContent == 1) {
+            if (consentCookieContent == 1) {
                 var type = cookieConsentConfig.purposes[p].type;
                 setSrc(type);
             }
 
-            for(var z in pContent.scripts) {
+            for (var z in pContent.scripts) {
                 var consentSubCookieContent = getConsentCookie(z);
-                if(consentSubCookieContent == 1) {
+                if (consentSubCookieContent == 1) {
                     var type = pContent.scripts[z].type;
                     setSrc(type);
                 }
@@ -601,24 +606,24 @@ function loadScripts() {
 }
 
 function setSrc(type) {
-    var elemList = document.querySelectorAll('[data-name='+ type +']');
+    var elemList = document.querySelectorAll('[data-name=' + type + ']');
     for (var i = 0, n = elemList.length; i < n; i++) {
         var domType = elemList[i].localName;
         var dataSrc = elemList[i].getAttribute('data-src');
         elemList[i].setAttribute('src', '');
-        if(domType === 'iframe') {
+        if (domType === 'iframe') {
             var html = "";
             elemList[i].innerHTML = html;
             reload = 1;
         }
-        if(dataSrc != null) {
-            if(domType === 'script') {
+        if (dataSrc != null) {
+            if (domType === 'script') {
                 loadFuntion(dataSrc, '');
             } else {
                 elemList[i].src = dataSrc;
             }
         } else {
-            if(domType === 'script') {
+            if (domType === 'script') {
                 var implementationCode = elemList[i].innerHTML;
                 loadFunction('', implementationCode);
             }
@@ -628,7 +633,7 @@ function setSrc(type) {
 
 function loadFiles(loadArray) {
     for (var p in loadArray) {
-        if( loadArray.hasOwnProperty(p) ) {
+        if (loadArray.hasOwnProperty(p)) {
             loadFunction(p, loadArray[p], document.body)
         }
     }
@@ -636,19 +641,21 @@ function loadFiles(loadArray) {
 
 function loadFunction(url, implementationCode) {
     /* load File */
-    var loadJSFile = function(url, location){
+    var loadJSFile = function (url, location) {
         var scriptTag = document.createElement('script');
         scriptTag.src = url;
         dosument.body.appendChild(scriptTag);
     };
     /* load Code */
 
-    if(url != '') {
+    if (url != '') {
         loadJSFile(url, location);
     }
 
     var script = document.createElement("script");
-    script.onload = script.onerror = function(){ this.remove(); };
+    script.onload = script.onerror = function () {
+        this.remove();
+    };
     script.src = "data:text/plain;base64," + btoa(implementationCode);
     document.body.appendChild(script);
 
@@ -657,3 +664,14 @@ function loadFunction(url, implementationCode) {
 function unloadScripts() {
 
 }
+
+/*
+        *
+        * Cookie Consent Configuration
+        *
+        */
+
+//onReady(loadCookieConsentInitial);
+document.addEventListener("DOMContentLoaded", function () {
+    loadCookieConsentInitial();
+});
